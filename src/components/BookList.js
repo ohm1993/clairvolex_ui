@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import bookService from '../services/bookService';
 import BookModal from './BookModal';
+import BookTable from './BookTable';
+import BookSearchForm from './BookSearchForm';
+import { useAuth } from '../context/AuthContext';
 
 function BookList() {
   const [books, setBooks] = React.useState([]);
@@ -13,6 +16,7 @@ function BookList() {
   const [showModal, setShowModal] = useState(false);
   const [sortField, setSortField] = useState('title');
   const [sortOrder, setSortOrder] = useState('ASC'); 
+  const { user } = useAuth();
 
   const fetchBooks = async (page = 1, searchTerm = '', sortField = 'title', sortOrder = 'ASC') => {
     setLoading(true);
@@ -80,70 +84,16 @@ function BookList() {
     {error && <p>{error}</p>}
     {!loading && !error && (
       <>
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <h2>Books</h2>
-          <form className="d-flex" onSubmit={handleSearch}>
-            <input
-              type="text"
-              name="searchInput"
-              className="form-control me-2"
-              placeholder="Search by title or author or published date(dd-mm-yyyy)"
-              value={searchTerm}
-              onChange={handleInputChange} 
-            />
-             <select
-                className="form-select me-2"
-                value={sortField}
-                onChange={handleSortFieldChange}
-              >
-                <option value="title">Title</option>
-                <option value="author">Author</option>
-                <option value="publishedDate">Published Date</option>
-              </select>
-              <select
-                className="form-select me-2"
-                value={sortOrder}
-                onChange={handleSortOrderChange}
-              >
-                <option value="ASC">Ascending</option>
-                <option value="DESC">Descending</option>
-              </select>
-            <button type="submit" className="btn btn-outline-primary">
-              Search
-            </button>
-          </form>
-        </div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Author</th>
-              <th scope="col">Published Date</th>
-              <th scope="col">Genre</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book) => (
-              <tr key={book.id}>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.publishedDate}</td>
-                <td>{book.genre}</td>
-                <td>
-                <td>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleViewClick(book)}
-                  >
-                    View
-                  </button>
-              </td>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <BookSearchForm
+          searchTerm={searchTerm}
+          onSearchTermChange={handleInputChange}
+          onSearchSubmit={handleSearch}
+          sortField={sortField}
+          onSortFieldChange={handleSortFieldChange}
+          sortOrder={sortOrder}
+          onSortOrderChange={handleSortOrderChange}
+        />
+        <BookTable books={books} onViewClick={handleViewClick} userRole={user.role}/>
         {selectedBook && (
           <BookModal
             show={showModal}

@@ -39,10 +39,30 @@ const searchBooks = async (searchParams,page,sortField = 'title', sortOrder = 'A
   }
 };
 
+const updateBook = async (id, updatedData) => {
+  try {
+    const response = await apiService.put(`${API_BASE_URL}/${id}`, updatedData, true);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteBook = async (id) => {
+  try {
+    const response = await apiService.delete(`${API_BASE_URL}/${id}`, true);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   getBooks,
   createBook,
   getBookById,
-  searchBooks
+  searchBooks,
+  updateBook,
+  deleteBook
 };
 

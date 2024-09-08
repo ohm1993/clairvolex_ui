@@ -37,6 +37,42 @@ const apiService = {
       throw error.response ? error.response.data : new Error('Network Error');
     }
   },
+
+  put: async (endpoint, data, includeAuth = false) => {
+    try {
+      const config = {};
+      if (includeAuth) {
+        const token = localStorage.getItem('token');
+        if (token) {
+          config.headers = {
+            Authorization: `Bearer ${token}`,
+          };
+        }
+      }
+      const response = await axios.put(`${API_BASE_URL}${endpoint}`, data, config);
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Network Error');
+    }
+  },
+  
+  delete: async (endpoint, includeAuth = false) => {
+    try {
+      const config = {};
+      if (includeAuth) {
+        const token = localStorage.getItem('token');
+        if (token) {
+          config.headers = {
+            Authorization: `Bearer ${token}`,
+          };
+        }
+      }
+      const response = await axios.delete(`${API_BASE_URL}${endpoint}`, config);
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Network Error');
+    }
+  }
   
 };
 
