@@ -101,6 +101,7 @@ function BookList() {
             book={selectedBook}
           />
         )}
+        {totalPages > 1 && (
         <div className="d-flex justify-content-end mt-4">
           <nav>
             <ul className="pagination">
@@ -120,6 +121,7 @@ function BookList() {
             </ul>
           </nav>
         </div>
+        )}
       </>
     )}
   </div>
