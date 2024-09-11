@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/clairvolex_ui/static/css/main.88e984bb.css",
+    "main.js": "/clairvolex_ui/static/js/main.d77c5b70.js",
+    "static/js/453.57039b03.chunk.js": "/clairvolex_ui/static/js/453.57039b03.chunk.js",
+    "index.html": "/clairvolex_ui/index.html",
+    "main.88e984bb.css.map": "/clairvolex_ui/static/css/main.88e984bb.css.map",
+    "main.d77c5b70.js.map": "/clairvolex_ui/static/js/main.d77c5b70.js.map",
+    "453.57039b03.chunk.js.map": "/clairvolex_ui/static/js/453.57039b03.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.88e984bb.css",
+    "static/js/main.d77c5b70.js"
+  ]
+}
