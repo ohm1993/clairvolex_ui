@@ -57,7 +57,7 @@ const deleteBook = async (id) => {
   }
 };
 
-export default {
+const bookService = {
   getBooks,
   createBook,
   getBookById,
@@ -65,4 +65,7 @@ export default {
   updateBook,
   deleteBook
 };
+
+export default bookService;
+
 
